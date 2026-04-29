@@ -111,7 +111,8 @@ const CourseDetail = () => {
       <AddDataModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
-        onDataAdded={fetchData} 
+        onDataAdded={fetchData}
+        fixedCourseId={id}
       />
     </div>
   );

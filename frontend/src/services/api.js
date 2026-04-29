@@ -34,3 +34,26 @@ export const addMarks = async (data) => {
   const response = await api.post('/marks', data);
   return response.data;
 };
+
+// Notification APIs
+export const getNotifications = async (role) => {
+  const params = role ? { role } : {};
+  const response = await api.get('/api/notifications', { params });
+  return response.data;
+};
+
+export const generateNotifications = async () => {
+  const response = await api.post('/api/notifications/generate');
+  return response.data;
+};
+
+export const markNotificationRead = async (id) => {
+  const response = await api.patch(`/api/notifications/${id}/read`);
+  return response.data;
+};
+
+export const markAllNotificationsRead = async (role) => {
+  const params = role ? { role } : {};
+  const response = await api.patch('/api/notifications/read-all', null, { params });
+  return response.data;
+};

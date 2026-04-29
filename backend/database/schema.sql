@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS students;
 DROP TABLE IF EXISTS courses;
 DROP TABLE IF EXISTS scores;
 DROP TABLE IF EXISTS submissions;
+DROP TABLE IF EXISTS notifications;
 
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -36,5 +37,17 @@ CREATE TABLE submissions (
     course_id INTEGER,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (student_id) REFERENCES students(id),
+    FOREIGN KEY (course_id) REFERENCES courses(id)
+);
+
+CREATE TABLE notifications (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    type TEXT NOT NULL CHECK(type IN ('warning', 'alert', 'reminder', 'info')),
+    role TEXT NOT NULL CHECK(role IN ('student', 'faculty', 'admin')),
+    title TEXT NOT NULL,
+    message TEXT NOT NULL,
+    course_id INTEGER,
+    is_read INTEGER DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (course_id) REFERENCES courses(id)
 );

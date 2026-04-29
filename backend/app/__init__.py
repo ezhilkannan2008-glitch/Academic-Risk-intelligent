@@ -15,8 +15,10 @@ def create_app(config_class=Config):
     from .routes.course_routes import bp as course_bp
     from .routes.risk_routes import bp as risk_bp
     from .routes.auth_routes import bp as auth_bp
+    from .routes.notification_routes import bp as notification_bp
     
     app.register_blueprint(course_bp)
     app.register_blueprint(risk_bp)
-    app.register_blueprint(auth_bp)    
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(notification_bp)
     return app

@@ -11,6 +11,9 @@ export const ScoreHistogram = ({ data }) => {
     count: count
   }));
 
+  // Use a fixed blue that works in both light and dark mode
+  const BAR_COLOR = '#3b82f6';
+
   return (
     <div className="chart-container glass-panel">
       <h3 className="chart-title">Score Distribution</h3>
@@ -20,18 +23,25 @@ export const ScoreHistogram = ({ data }) => {
             <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" vertical={false} />
             <XAxis dataKey="range" stroke="var(--text-secondary)" tick={{fill: 'var(--text-secondary)', fontSize: 12}} />
             <YAxis stroke="var(--text-secondary)" tick={{fill: 'var(--text-secondary)', fontSize: 12}} />
-            <RechartsTooltip 
-              contentStyle={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', borderRadius: '8px' }}
-              itemStyle={{ color: 'var(--primary-color)' }}
-              cursor={{fill: 'var(--hover-bg)'}}
+            <RechartsTooltip
+              contentStyle={{
+                backgroundColor: 'var(--bg-secondary)',
+                border: '1px solid var(--border-color)',
+                borderRadius: '8px',
+                color: 'var(--text-primary)'
+              }}
+              itemStyle={{ color: BAR_COLOR }}
+              labelStyle={{ color: 'var(--text-primary)', fontWeight: 700 }}
+              cursor={{ fill: 'rgba(59, 130, 246, 0.12)' }}
             />
-            <Bar dataKey="count" fill="var(--primary-color)" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="count" fill={BAR_COLOR} radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
     </div>
   );
 };
+
 
 export const TimelineChart = ({ data }) => {
   // Process timeline data by day
