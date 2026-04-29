@@ -66,12 +66,16 @@ def generate_data():
             else:
                 score = min(100, max(0, random.gauss(75, 10)))
                 
-            scores.append((student_id, course_id, round(score, 2)))
+            mcq = min(100, max(0, score + random.randint(-10, 10)))
+            assignment = min(100, max(0, score + random.randint(-5, 5)))
+            sliptest = min(100, max(0, score + random.randint(-15, 15)))
+            score = (mcq + assignment + sliptest) / 3.0
+                
+            scores.append((student_id, course_id, round(mcq, 2), round(assignment, 2), round(sliptest, 2), round(score, 2)))
             submissions.append((student_id, course_id, sub_time.strftime('%Y-%m-%d %H:%M:%S')))
             
-    cur.executemany('INSERT INTO scores (student_id, course_id, score) VALUES (?, ?, ?)', scores)
-    cur.executemany('INSERT INTO submissions (student_id, course_id, timestamp) VALUES (?, ?, ?)', submissions)
-    
+    cur.executemany('INSERT INTO scores (student_id, course_id, mcq_mark, assignment_mark, sliptest_mark, score) VALUES (?, ?, ?, ?, ?, ?)', scores)
+    cur.executemany('INSERT INTO submissions (student_id, course_id, timestamp) VALUES (?, ?, ?)', submissions)    
     conn.commit()
     conn.close()
     print("Data generated successfully.")

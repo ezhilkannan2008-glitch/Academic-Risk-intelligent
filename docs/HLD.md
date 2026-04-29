@@ -29,3 +29,53 @@ The system is built using a decoupled architecture with a React frontend and a F
 - `submissions` (`id`, `student_id`, `course_id`, `timestamp`)
 
 *Note: In the data generation, we treat `course_id` similarly to an `assignment_id` to keep the model focused on course-level analysis.*
+
+## Detailed System Operation
+
+### Step 1: Data Ingestion & Integration
+The system's operation begins at the data layer, where raw academic data is ingested and securely stored.
+* **Storage Structure:** The system relies on a relational SQLite database containing interconnected tables: `students`, `courses`, `scores`, and `submissions`.
+* **Detailed Metrics:** It doesn't just look at a final grade. It ingests granular data, including specific component marks (`mcq_mark`, `assignment_mark`, `sliptest_mark`), and calculates an overall score.
+* **Data Sources:** Data is ingested either via batch processing (e.g., the `generate_data.py` script acting as a simulated CSV/database import) or through manual data entry via the React frontend's **Add Data** portal.
+
+### Step 2: Statistical Computation
+Once the data is ingested, the backend (built with Python and Flask) queries the database and runs mathematical computations to establish a baseline for normal behavior.
+* **Mean (Average):** The system calculates the average score for the entire course to understand the general difficulty level.
+* **Standard Deviation:** It calculates the variance in scores. A low standard deviation means most students scored very close to the average, while a high standard deviation means scores were wildly spread out.
+* **High-Performer Counts:** It aggregates data into histograms (score bins) to explicitly count how many students fall into the highest percentiles (e.g., marks above 90).
+
+### Step 3: Anomaly Detection (Rules Engine)
+This is the core "intelligence" of the system. The computed statistics are passed through predefined, threshold-based rules to detect patterns indicative of academic risk:
+* **Unusually High Averages (The "Easy Course"):** If the mean score exceeds a specific upper threshold (e.g., > 85%), the system flags the assessment as potentially compromised, overly easy, or leniently graded.
+* **Low Averages (The "Difficult Course"):** If the mean score drops below a lower threshold, it flags the course as having a severe difficulty spike, which often leads to higher instances of desperate cheating.
+* **High Variance / Inconsistent Grading:** If the standard deviation is unusually high, it indicates an inconsistent evaluation rubric or a bimodal distribution (where half the class failed and half got perfect scores—a massive red flag for leaked answers).
+* **Excessive High Scorers:** If the histogram reveals a disproportionate cluster of students scoring 90-100 without a normal bell curve, it flags the assessment for extreme leniency or widespread academic dishonesty.
+
+### Step 4: Risk Aggregation & Classification
+Individual anomalies are valuable, but the system must synthesize them to determine overall urgency.
+* **Composite Risk Score:** Each detected anomaly (flag) is assigned a specific weight. For example, a "Performance Spike" combined with "Submission Clustering" (everyone submitting at the exact same time) yields a much higher risk weight than just a slightly high average. These weights are summed into a final **Risk Score (0-100)**.
+* **Categorization:** Based on the numerical score, the course is strictly classified:
+  * **Low Risk** (e.g., 0-39): Normal bell curve, healthy distribution.
+  * **Medium Risk** (e.g., 40-69): Minor anomalies detected; requires standard review.
+  * **High Risk** (e.g., 70-100): Severe statistical anomalies; indicates likely academic integrity violations requiring immediate administrative intervention.
+
+### Step 5: Visualization & Actionable Insights
+The backend packages the raw stats, flags, risk score, and category into a clean JSON API response. The React frontend consumes this data and translates it into a human-readable dashboard.
+* **Visualizations:** The frontend utilizes `Recharts` to generate **Score Histograms** (showing exactly where the suspicious clusters are) and **Timeline Charts** (showing submission behaviors over time).
+* **Risk Badges:** Courses are prominently labeled with colored badges (Green for Low, Yellow for Medium, Red for High) so administrators can triage issues at a glance.
+* **Insights & Recommendations:** Rather than just showing numbers, the system auto-generates text explanations (e.g., *"High average score indicates potentially compromised assessment."*) and concrete recommendations (e.g., *"Review grading rubric and introduce question randomization."*) so educators know exactly how to fix the vulnerability.
+
+## Project Programming Style
+
+To maintain consistency, readability, and performance across the codebase, this project strictly adheres to the following programming styles and conventions:
+
+### Frontend (React & CSS)
+* **Functional Components & Hooks:** Class components are avoided. All state management and lifecycle events are handled via standard React Hooks (`useState`, `useEffect`, `useCallback`).
+* **Modular CSS with Glassmorphism:** We rely on raw, vanilla CSS (`styles.css`) utilizing CSS variables (`--primary-color`, etc.) rather than heavy frameworks like Tailwind or Bootstrap. The core aesthetic relies on "Glassmorphism" (translucent backgrounds with `backdrop-filter: blur()`) to create a premium, modern feel.
+* **Service-Oriented API Calls:** API interactions are decoupled from UI components. Axios is used inside dedicated service files (e.g., `services/api.js`) to ensure clean separation of concerns.
+
+### Backend (Python & Flask)
+* **Blueprint Architecture:** The Flask application is modularized using Blueprints (e.g., `auth_routes.py`, `course_routes.py`) rather than a monolithic app structure.
+* **Service Layer Pattern:** Business logic and heavy computations (e.g., risk analysis algorithms) are kept out of route handlers and placed in dedicated service modules (`analytics_service.py`, `risk_service.py`).
+* **Raw SQL over ORM:** For maximum performance and transparency, the project uses direct SQLite queries via a custom database helper (`db.execute()`, `query_db()`) rather than heavy ORMs like SQLAlchemy.
+* **Secure by Default:** Passwords and sensitive data are never stored in plaintext; `werkzeug.security` is strictly utilized for cryptographic hashing.

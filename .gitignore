@@ -7,9 +7,9 @@
 *.sln
 
 # Backend (Python / Flask)
-backend/__pycache__/
-backend/*.py[cod]
-backend/*$py.class
+__pycache__/
+*.py[cod]
+*$py.class
 backend/venv/
 backend/.env
 backend/database/app.db

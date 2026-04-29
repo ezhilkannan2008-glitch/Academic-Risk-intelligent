@@ -20,3 +20,17 @@ export const getCourseDetail = async (id) => {
   const response = await api.get(`/course/${id}`);
   return response.data;
 };
+
+export const login = async (username, password) => {
+  const response = await api.post('/api/auth/login', { username, password });
+  return response.data;
+};
+
+export const signup = async (username, password) => {
+  const response = await api.post('/api/auth/signup', { username, password });
+  return response.data;
+};
+export const addMarks = async (data) => {
+  const response = await api.post('/marks', data);
+  return response.data;
+};

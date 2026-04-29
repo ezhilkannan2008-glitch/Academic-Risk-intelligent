@@ -15,25 +15,25 @@ def get_all_risk_analysis():
         
         flags = analytics['flags']
         
-        if "Easy Exam" in flags:
+        if "Easy course" in flags:
             risk_score += 30
-            explanation_parts.append("High average score indicates potentially compromised or overly easy assessment.")
-        if "Low Variance" in flags:
+            explanation_parts.append("High average marks (> 85) indicating an easy course.")
+        if "Difficult course" in flags:
+            risk_score += 20
+            explanation_parts.append("Low average marks (< 50) indicating a difficult course.")
+        if "Inconsistent grading" in flags:
+            risk_score += 40
+            explanation_parts.append("High standard deviation (> 20) indicating inconsistent grading.")
+        if "Lenient evaluation" in flags:
             risk_score += 30
-            explanation_parts.append("Low score variance suggests lack of distinct performance evaluation.")
-        if "Submission Clustering" in flags:
-            risk_score += 20
-            explanation_parts.append(f"Suspicious submission clustering ({analytics['max_submissions_in_minute']} submissions in one minute).")
-        if "Performance Spike" in flags:
-            risk_score += 20
-            explanation_parts.append("Sudden jump in score distribution detected.")
+            explanation_parts.append("High number of toppers (> 5 students > 90) indicating lenient evaluation.")
             
-        if risk_score <= 30:
-            risk_level = "Low"
-        elif risk_score <= 70:
+        if risk_score >= 60:
+            risk_level = "High"
+        elif risk_score >= 30:
             risk_level = "Medium"
         else:
-            risk_level = "High"
+            risk_level = "Low"
             
         explanation = " ".join(explanation_parts) if explanation_parts else "Score distribution and submission patterns are normal."
         

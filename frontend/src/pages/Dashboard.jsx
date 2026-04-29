@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { getRiskAnalysis } from '../services/api';
 import CourseCard from '../components/CourseCard';
 
@@ -6,23 +6,25 @@ const Dashboard = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getRiskAnalysis();
-        // Sort by risk score descending
-        data.sort((a, b) => b.risk_score - a.risk_score);
-        setCourses(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const data = await getRiskAnalysis();
+      // Sort by risk score descending
+      data.sort((a, b) => b.risk_score - a.risk_score);
+      setCourses(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  if (loading) return <div className="loader">Loading analytics...</div>;
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  if (loading && courses.length === 0) return <div className="loader">Loading analytics...</div>;
 
   return (
     <div className="page-container">
