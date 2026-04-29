@@ -1,20 +1,6 @@
-# General
-.DS_Store
-.vscode/
-.idea/
-*.log
-*.suo
-*.sln
-
-# Backend (Python / Flask)
-__pycache__/
-*.py[cod]
-*$py.class
-backend/venv/
-backend/.env
-backend/database/app.db
-
-# Frontend (Node / React / Vite)
+# ==========================================
+# Frontend (React/Vite/Node)
+# ==========================================
 frontend/node_modules/
 frontend/dist/
 frontend/dist-ssr/
@@ -26,9 +12,54 @@ frontend/.env.production.local
 frontend/*.local
 frontend/*.njsproj
 
-# Libraries
-node_modules/
+# ==========================================
+# Backend (Python/Flask)
+# ==========================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+backend/venv/
+backend/.venv/
 venv/
 .venv/
 env/
-lib/
+ENV/
+
+# Flask environment variables
+backend/.env
+
+# Databases
+# If you WANT to commit your database so others can see the data, comment out the lines below:
+# backend/database/*.db
+# backend/database/*.sqlite
+# backend/database/*.sqlite3
+
+# Currently ignoring academic_risk.db just in case it is a leftover file
+backend/database/academic_risk.db
+
+# ==========================================
+# OS & Editor Files
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# VS Code
+.vscode/
+*.code-workspace
+.history/
+
+# IntelliJ / PyCharm
+.idea/
+*.iml
+*.iws
+
+# Logs
+*.log
