@@ -1,96 +1,14 @@
-# ==========================================
-# Frontend (React/Vite/Node)
-# ==========================================
+# Node
 node_modules/
-frontend/node_modules/
 dist/
-frontend/dist/
-frontend/dist-ssr/
-*.local
-frontend/.env
-frontend/.env.local
-frontend/.env.development.local
-frontend/.env.test.local
-frontend/.env.production.local
+build/
+
+# Python
+__pycache__/
+*.pyc
+
+# Env
+.env
 
 # Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-# Editor/OS
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# ==========================================
-# Backend (Python/Flask)
-# ==========================================
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# Virtual environments
-venv/
-.venv/
-env/
-ENV/
-backend/venv/
-backend/.venv/
-
-# Pytest / Coverage
-.cache/
-.pytest_cache/
-.coverage
-.coverage.*
-.noserc
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-
-# Flask/Django
-.env
-backend/.env
-instance/
-.webassets-cache
-
-# Databases
-# Uncomment these if you want to stop tracking the database
-# *.db
-# *.sqlite3
-# backend/database/*.db
-
-# Project Specific
-*_histogram.png
-sample_marks.csv
-academic_risk.db
-# reset_auth.py # Keep this as a utility
+*.log
