@@ -34,6 +34,9 @@ const Sidebar = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
+  if (isAuthPage) return null;
+
   return (
     <>
       <aside className={`sidebar glass-panel ${isCollapsed ? 'collapsed' : ''}`}>
@@ -74,7 +77,7 @@ const Sidebar = () => {
           </Link>
 
           <button
-            className={`sidebar-btn btn-grey ${showNotifications ? 'active' : ''}`}
+            className={`sidebar-btn btn-gold ${showNotifications ? 'active' : ''}`}
             onClick={() => setShowNotifications(true)}
           >
             <span className="btn-icon">🔔</span>

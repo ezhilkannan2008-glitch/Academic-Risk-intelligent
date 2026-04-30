@@ -37,8 +37,11 @@ const AdminDashboard = () => {
     <div className="dashboard-container">
       <header className="dashboard-header">
         <div>
+          <p className="welcome-msg" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
+            Welcome, <span style={{ color: 'var(--primary-color)', fontWeight: '700' }}>{localStorage.getItem('username') || 'Jerry Davenport'}</span>
+          </p>
           <h1>Admin Power Dashboard</h1>
-          <p className="subtitle">Real-time metrics from ML Predictor & Student database</p>
+          <p className="subtitle">Real-time metrics from Student database</p>
         </div>
       </header>
 
@@ -48,7 +51,7 @@ const AdminDashboard = () => {
           <div style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--primary-color)' }}>{data.total_students.toLocaleString()}</div>
         </div>
         <div className="stat-card glass-panel" style={{ padding: '1.5rem', borderRadius: '12px' }}>
-          <h3 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '0.5rem' }}>At-Risk Students (ML Flagged)</h3>
+          <h3 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '0.5rem' }}>At-Risk Students</h3>
           <div style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--danger-color)' }}>
             {data.risk_distribution.find(r => r.name === 'At Risk')?.count || 0}
           </div>
@@ -59,11 +62,17 @@ const AdminDashboard = () => {
             ₹{(data.total_fees / 10000000).toFixed(2)} Cr
           </div>
         </div>
+        <div className="stat-card glass-panel" style={{ padding: '1.5rem', borderRadius: '12px' }}>
+          <h3 style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '0.5rem' }}>Scholarships Disbursed</h3>
+          <div style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--accent-color)' }}>
+            ₹{(data.total_scholarships / 10000000).toFixed(2)} Cr
+          </div>
+        </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '2rem' }}>
         <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '16px' }}>
-          <h3>Financial Overview (ML Enriched)</h3>
+          <h3>Financial Overview</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie data={feesChartData} cx="50%" cy="50%" innerRadius={60} outerRadius={100} paddingAngle={5} dataKey="value">
@@ -84,7 +93,7 @@ const AdminDashboard = () => {
               <YAxis stroke="var(--text-secondary)" />
               <BarTooltip />
               <Legend />
-              <Bar dataKey="count" name="Student Count" radius={[4, 4, 0, 0]}>
+              <Bar dataKey="count" name="Student Count" radius={[4, 4, 0, 0]} label={{ position: 'top', fill: 'var(--text-secondary)', fontSize: 12, fontWeight: 600 }}>
                 {data.risk_distribution.map((entry, index) => (
                   <Cell 
                     key={`cell-${index}`} 

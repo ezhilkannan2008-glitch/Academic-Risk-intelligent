@@ -43,7 +43,10 @@ const StudentDashboard = () => {
     <div className="dashboard-container">
       <header className="dashboard-header" style={{ marginBottom: '2rem' }}>
         <div>
-          <h1>Welcome, {profile.name || "Student"}</h1>
+          <p className="welcome-msg" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.25rem' }}>
+            Welcome, <span style={{ color: 'var(--primary-color)', fontWeight: '700' }}>{localStorage.getItem('username') || profile.name || 'Jerry Davenport'}</span>
+          </p>
+          <h1>Student Performance Dashboard</h1>
           <p className="subtitle">Your Holistic Academic Integrity & Performance Overview</p>
         </div>
       </header>
@@ -63,7 +66,7 @@ const StudentDashboard = () => {
         </div>
 
         <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <h3>Profile Strength (ML Analysis)</h3>
+          <h3>Profile Strength Analysis</h3>
           <ResponsiveContainer width="100%" height={250}>
             <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
               <PolarGrid stroke="var(--border-color)" />
@@ -77,21 +80,32 @@ const StudentDashboard = () => {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
         <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '16px' }}>
-          <h3>ML Prediction & Status</h3>
+          <h3>Prediction & Status</h3>
           <div style={{ padding: '1rem', borderRadius: '12px', background: profile.predicted_risk ? 'rgba(239, 68, 68, 0.1)' : 'rgba(16, 185, 129, 0.1)', border: `1px solid ${profile.predicted_risk ? '#ef4444' : '#10b981'}` }}>
             <h4 style={{ color: profile.predicted_risk ? '#ef4444' : '#10b981', marginBottom: '0.5rem' }}>
               {profile.predicted_risk ? '⚠️ At Risk Flagged' : '✅ Academic Standing: Safe'}
             </h4>
             <p style={{ fontSize: '0.9rem' }}>
-              Our ML model has analyzed your attendance ({profile.attendance_pct}%), stress level, and submission patterns.
+              Our model has analyzed your attendance ({profile.attendance_pct}%), stress level, and submission patterns.
             </p>
           </div>
         </div>
 
         <div className="glass-panel" style={{ padding: '1.5rem', borderRadius: '16px' }}>
-          <h3>Intelligent Suggestions</h3>
-          <div style={{ fontStyle: 'italic', color: 'var(--text-primary)', borderLeft: '4px solid var(--primary-color)', paddingLeft: '1rem' }}>
-            "{profile.suggestion || "Keep up the consistent performance! Ensure your assignment submission rate stays above 90% to maintain your current grade trajectory."}"
+          <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <span>💡</span> Intelligent Suggestions
+          </h3>
+          <div style={{ 
+            fontStyle: 'italic', 
+            color: 'var(--text-primary)', 
+            borderLeft: '4px solid #f59e0b', 
+            padding: '1rem',
+            background: 'rgba(245, 158, 11, 0.05)',
+            borderRadius: '0 8px 8px 0',
+            marginTop: '1rem',
+            lineHeight: '1.6'
+          }}>
+            "{profile.suggestion || "Excellent work! Stay consistent with your current study patterns to maintain your high academic standing."}"
           </div>
         </div>
       </div>

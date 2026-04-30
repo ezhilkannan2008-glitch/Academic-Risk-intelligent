@@ -830,7 +830,7 @@ a {
 .notif-header {
   padding: 1.5rem;
   border-bottom: 1px solid var(--border-color);
-  background: var(--bg-secondary);
+  background: linear-gradient(to right, rgba(252, 211, 77, 0.1), rgba(245, 158, 11, 0.05));
   flex-shrink: 0;
 }
 
@@ -1437,12 +1437,22 @@ a {
   color: white;
 }
 
+.btn-gold {
+  background: linear-gradient(135deg, #fcd34d, #f59e0b);
+  color: #78350f !important;
+}
+
+.btn-gold .btn-text {
+  color: #78350f !important;
+}
+
 .nav-btn.btn-blue:hover,
 .nav-btn.btn-green:hover,
 .nav-btn.btn-purple:hover,
 .nav-btn.btn-orange:hover,
-.nav-btn.btn-grey:hover {
-  color: white;
+.nav-btn.btn-grey:hover,
+.nav-btn.btn-gold:hover {
+  color: inherit;
   text-decoration: none;
 }
 

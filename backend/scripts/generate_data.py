@@ -6,7 +6,6 @@ from datetime import datetime, timedelta
 def generate_data():
     db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'database', 'app.db')
     schema_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'database', 'schema.sql')
-    
     conn = sqlite3.connect(db_path)
     cur = conn.cursor()
     
@@ -19,9 +18,16 @@ def generate_data():
     
     # 2. Generate 10 courses
     course_names = [
-        'Data Structures', 'Algorithms', 'Database Systems', 'Operating Systems',
-        'Computer Networks', 'Machine Learning', 'Artificial Intelligence',
-        'Software Engineering', 'Web Development', 'Cybersecurity'
+        'Multiple Integral and Transformer',
+        'Technical English',
+        'Quantum Mechanics',
+        'Python Programming',
+        'Data Structures & Algorithms',
+        'Artificial Intelligence',
+        'Cloud Computing',
+        'Cybersecurity & Privacy',
+        'Digital Marketing Analytics',
+        'Mobile App Development'
     ]
     courses = [(name,) for name in course_names]
     cur.executemany('INSERT INTO courses (course_name) VALUES (?)', courses)
