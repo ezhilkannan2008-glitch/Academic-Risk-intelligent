@@ -92,4 +92,5 @@ instance/
 # Project Specific
 *_histogram.png
 sample_marks.csv
+academic_risk.db
 # reset_auth.py # Keep this as a utility
