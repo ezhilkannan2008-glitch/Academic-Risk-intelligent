@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import CourseDetail from './pages/CourseDetail';
 import Login from './pages/Login';
@@ -19,16 +19,18 @@ const ProtectedRoute = ({ children }) => {
 function App() {
   return (
     <Router>
-      <div className="app-container">
-        <Navbar />
-        <main className="main-content">
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/course/:id" element={<ProtectedRoute><CourseDetail /></ProtectedRoute>} />
-          </Routes>
-        </main>
+      <div className="app-layout">
+        <Sidebar />
+        <div className="main-wrapper">
+          <main className="main-content">
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/course/:id" element={<ProtectedRoute><CourseDetail /></ProtectedRoute>} />
+            </Routes>
+          </main>
+        </div>
       </div>
     </Router>
   );

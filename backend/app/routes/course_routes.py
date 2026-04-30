@@ -99,3 +99,55 @@ def add_marks():
         return jsonify({"message": "Marks added successfully", "score": score}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+import csv
+import io
+from flask import Response
+
+@bp.route('/course/<int:id>/export', methods=['GET'])
+def export_course_data(id):
+    # Verify course exists
+    course = query_db("SELECT course_name FROM courses WHERE id = ?", (id,), one=True)
+    if not course:
+        return jsonify({"error": "Course not found"}), 404
+
+    # Query all students and their scores for this course
+    query = """
+        SELECT s.id, s.name, sc.mcq_mark, sc.assignment_mark, sc.sliptest_mark, sc.score
+        FROM students s
+        JOIN scores sc ON s.id = sc.student_id
+        WHERE sc.course_id = ?
+        ORDER BY s.id ASC
+    """
+    results = query_db(query, (id,))
+
+    # Build CSV in memory
+    output = io.StringIO()
+    writer = csv.writer(output)
+    
+    # Header row
+    writer.writerow(['Student ID', 'Student Name', 'MCQ Mark', 'Assignment Mark', 'Test Mark', 'Final Score'])
+    
+    # Data rows
+    for row in results:
+        writer.writerow([
+            row['id'], 
+            row['name'], 
+            round(row['mcq_mark'], 2), 
+            round(row['assignment_mark'], 2), 
+            round(row['sliptest_mark'], 2), 
+            round(row['score'], 2)
+        ])
+
+    csv_data = output.getvalue()
+    
+    # Create response
+    course_name_safe = "".join([c if c.isalnum() else "_" for c in course['course_name']])
+    filename = f"{course_name_safe}_report.csv"
+    
+    return Response(
+        csv_data,
+        mimetype="text/csv",
+        headers={"Content-Disposition": f"attachment;filename={filename}"}
+    )
+

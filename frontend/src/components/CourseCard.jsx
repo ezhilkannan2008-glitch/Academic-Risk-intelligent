@@ -17,11 +17,25 @@ const CourseCard = ({ course }) => {
           ))}
         </div>
       )}
-      
-      <p className="course-explanation">{course.explanation}</p>
-      
-      <div className="course-card-footer">
-        View Analytics <span className="arrow">→</span>
+
+      <div style={{ marginTop: 'auto', paddingTop: '1.5rem' }}>
+        <div className="full-width-btn" style={{ 
+          width: '100%', 
+          padding: '1.25rem', 
+          background: 'var(--primary-color)', 
+          color: 'white', 
+          borderRadius: '8px', 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center',
+          gap: '0.5rem',
+          fontWeight: '700',
+          fontSize: '1.1rem',
+          boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+          transition: 'transform 0.2s ease'
+        }}>
+          View Analytics <span className="arrow" style={{ transform: 'rotate(-45deg)', display: 'inline-block', fontSize: '1.2rem' }}>➔</span>
+        </div>
       </div>
     </Link>
   );

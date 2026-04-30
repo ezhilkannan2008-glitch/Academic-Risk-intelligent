@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getCourseDetail } from '../services/api';
+import { getCourseDetail, exportCourseData } from '../services/api';
 import RiskBadge from '../components/RiskBadge';
 import { ScoreHistogram, TimelineChart } from '../components/Charts';
 import AddDataModal from '../components/AddDataModal';
@@ -27,6 +27,24 @@ const CourseDetail = () => {
     fetchData();
   }, [fetchData]);
 
+  const handleExport = async () => {
+    if (!courseData) return;
+    try {
+      const blob = await exportCourseData(id);
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement('a');
+      link.href = url;
+      const safeName = courseData.course_name.replace(/[^a-zA-Z0-9]/g, '_');
+      link.setAttribute('download', `${safeName}_report.csv`);
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+    } catch (error) {
+      console.error('Error exporting data:', error);
+      alert('Failed to export data');
+    }
+  };
+
   if (loading && !courseData) return <div className="loader">Analyzing course data...</div>;
   if (!courseData) return <div className="error">Course not found.</div>;
 
@@ -42,13 +60,22 @@ const CourseDetail = () => {
             <h1 className="page-title">{course_name}</h1>
             {risk && <RiskBadge level={risk.risk_level} score={risk.risk_score} />}
           </div>
-          <button 
-            className="login-button" 
-            style={{ width: 'auto', padding: '0.5rem 1rem', marginTop: 0 }}
-            onClick={() => setIsModalOpen(true)}
-          >
-            + Add Data
-          </button>
+          <div style={{ display: 'flex', gap: '0.8rem' }}>
+            <button 
+              className="nav-btn btn-green"
+              onClick={handleExport}
+            >
+              <span className="btn-icon">⬇️</span>
+              <span className="btn-text">Download Report</span>
+            </button>
+            <button 
+              className="nav-btn btn-blue" 
+              onClick={() => setIsModalOpen(true)}
+            >
+              <span className="btn-icon">➕</span>
+              <span className="btn-text">Add Data</span>
+            </button>
+          </div>
         </div>
         <div className="stats-row" style={{ marginTop: '1.5rem' }}>
           <div className="stat-card">

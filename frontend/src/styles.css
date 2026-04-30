@@ -877,7 +877,7 @@ a {
 
 .notif-role-tab.active {
   background: var(--primary-color);
-  color: #fff;
+  color: #ffffff;
   border-color: var(--primary-color);
 }
 
@@ -1380,3 +1380,237 @@ a {
   font-weight: 600;
   color: var(--text-error);
 }
+/* Navigation Buttons Styles */
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.nav-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  filter: brightness(1.1);
+}
+
+.nav-btn .btn-icon {
+  font-size: 1.1rem;
+}
+
+.nav-btn .btn-text {
+  color: white;
+}
+
+/* Button Colors */
+.btn-blue {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+}
+
+.btn-green {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+}
+
+.btn-purple {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: white;
+}
+
+.btn-orange {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+}
+
+.btn-grey {
+  background: linear-gradient(135deg, #6b7280, #4b5563);
+  color: white;
+}
+
+.nav-btn.btn-blue:hover,
+.nav-btn.btn-green:hover,
+.nav-btn.btn-purple:hover,
+.nav-btn.btn-orange:hover,
+.nav-btn.btn-grey:hover {
+  color: white;
+  text-decoration: none;
+}
+
+
+/* Sidebar Layout Styles */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-navbar);
+  border-right: 1px solid var(--border-color);
+  padding: 1.5rem 1rem;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  margin-bottom: 2rem;
+  padding-left: 0.5rem;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--primary-color);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  width: 100%;
+  position: relative;
+}
+
+.sidebar-btn:hover {
+  transform: translateX(4px);
+  filter: brightness(1.1);
+}
+
+.sidebar-btn .btn-icon {
+  font-size: 1.2rem;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar-btn .btn-text {
+  color: white;
+  text-align: left;
+}
+
+.bell-badge-sidebar {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ef4444;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: 9999px;
+}
+
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-top: 2rem;
+}
+
+.main-content {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 2rem 3rem 2rem;
+}
+
+/* Specific styling for sidebar links to keep white text */
+.sidebar-btn:hover {
+  color: white;
+  text-decoration: none;
+}
+
+
+/* Sidebar Collapsed Styles */
+.sidebar {
+  transition: width 0.3s ease, min-width 0.3s ease, padding 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+  min-width: 80px;
+  padding: 1.5rem 0.5rem;
+}
+
+.sidebar.collapsed .brand-text,
+.sidebar.collapsed .btn-text {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-btn {
+  justify-content: center;
+  padding: 0.8rem 0;
+}
+
+.sidebar.collapsed .btn-icon {
+  margin: 0;
+}
+
+.collapse-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collapse-btn:hover {
+  background: var(--bg-secondary);
+  color: var(--primary-color);
+}
+

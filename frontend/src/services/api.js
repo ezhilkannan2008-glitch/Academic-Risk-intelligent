@@ -57,3 +57,11 @@ export const markAllNotificationsRead = async (role) => {
   const response = await api.patch('/api/notifications/read-all', null, { params });
   return response.data;
 };
+
+// Export API
+export const exportCourseData = async (id) => {
+  const response = await api.get(`/course/${id}/export`, {
+    responseType: 'blob' // Important for file downloads
+  });
+  return response.data;
+};
