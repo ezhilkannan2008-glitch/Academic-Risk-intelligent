@@ -55,11 +55,26 @@ const Sidebar = () => {
         <div className="sidebar-nav">
           <Link to="/" className={`sidebar-btn btn-purple ${isActive('/') ? 'active' : ''}`}>
             <span className="btn-icon">🎓</span>
-            <span className="btn-text">Dashboard</span>
+            <span className="btn-text">Course Risk Dashboard</span>
+          </Link>
+
+          <Link to="/admin" className={`sidebar-btn btn-blue ${isActive('/admin') ? 'active' : ''}`}>
+            <span className="btn-icon">🏛️</span>
+            <span className="btn-text">Admin View</span>
+          </Link>
+
+          <Link to="/teacher" className={`sidebar-btn btn-green ${isActive('/teacher') ? 'active' : ''}`}>
+            <span className="btn-icon">👩‍🏫</span>
+            <span className="btn-text">Teacher View</span>
+          </Link>
+
+          <Link to="/student" className={`sidebar-btn btn-orange ${isActive('/student') ? 'active' : ''}`}>
+            <span className="btn-icon">🧑‍🎓</span>
+            <span className="btn-text">Student View</span>
           </Link>
 
           <button
-            className={`sidebar-btn btn-orange ${showNotifications ? 'active' : ''}`}
+            className={`sidebar-btn btn-grey ${showNotifications ? 'active' : ''}`}
             onClick={() => setShowNotifications(true)}
           >
             <span className="btn-icon">🔔</span>
@@ -72,10 +87,10 @@ const Sidebar = () => {
           <button 
             className="sidebar-btn btn-grey"
             onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-            title="Settings / Theme"
+            title="Toggle Theme"
           >
-            <span className="btn-icon">⚙️</span>
-            <span className="btn-text">Settings</span>
+            <span className="btn-icon">{theme === 'light' ? '🌙' : '☀️'}</span>
+            <span className="btn-text">{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</span>
           </button>
         </div>
 

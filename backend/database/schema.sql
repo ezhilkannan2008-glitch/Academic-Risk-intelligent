@@ -40,6 +40,42 @@ CREATE TABLE submissions (
     FOREIGN KEY (course_id) REFERENCES courses(id)
 );
 
+CREATE TABLE student_analytics (
+    student_id INTEGER PRIMARY KEY,
+    year INTEGER,
+    semester INTEGER,
+    gender TEXT,
+    age INTEGER,
+    caste TEXT,
+    family_income REAL,
+    internal_marks REAL,
+    theory_marks REAL,
+    practical_marks REAL,
+    backlogs INTEGER,
+    fees_paid REAL,
+    scholarship_received REAL,
+    teacher_rating REAL,
+    library_usage REAL,
+    disciplinary_action INTEGER,
+    attendance_pct REAL,
+    submission_rate REAL,
+    participation REAL,
+    late_submissions INTEGER,
+    lms_login_count INTEGER,
+    video_watched INTEGER,
+    forum_participation INTEGER,
+    study_hours REAL,
+    stress_level INTEGER,
+    mental_health_score REAL,
+    clubs_joined INTEGER,
+    events_participation INTEGER,
+    total_marks REAL,
+    actual_risk INTEGER,
+    predicted_risk INTEGER,
+    suggestion TEXT,
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
+
 CREATE TABLE notifications (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     type TEXT NOT NULL CHECK(type IN ('warning', 'alert', 'reminder', 'info')),

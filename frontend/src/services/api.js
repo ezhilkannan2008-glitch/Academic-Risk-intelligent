@@ -65,3 +65,19 @@ export const exportCourseData = async (id) => {
   });
   return response.data;
 };
+
+// Analytics APIs (Real ML Data)
+export const getAdminAnalytics = async () => {
+  const response = await api.get('/api/analytics/admin');
+  return response.data;
+};
+
+export const getTeacherAnalytics = async () => {
+  const response = await api.get('/api/analytics/teacher');
+  return response.data;
+};
+
+export const getStudentProfile = async (id) => {
+  const response = await api.get(`/api/analytics/student/${id}`);
+  return response.data;
+};

@@ -1,6 +1,6 @@
 :root, [data-theme="light"] {
   /* Soft Light Mode Theme (Default) */
-  --bg-primary: #f9fafb;
+  --bg-primary: #F8FAFC;
   --bg-secondary: #ffffff;
   --bg-glass: rgba(255, 255, 255, 0.85);
   --bg-grid: #e5e7eb;
@@ -44,11 +44,11 @@
 
 [data-theme="dark"] {
   /* Premium Dark Mode Theme */
-  --bg-primary: #121212;
-  --bg-secondary: #1e1e1e;
-  --bg-glass: rgba(30, 30, 30, 0.85);
-  --bg-grid: #333333;
-  --bg-navbar: rgba(30, 30, 30, 0.9);
+  --bg-primary: #0F172A;
+  --bg-secondary: #1E293B;
+  --bg-glass: rgba(15, 23, 42, 0.85);
+  --bg-grid: #1e293b;
+  --bg-navbar: rgba(15, 23, 42, 0.9);
   
   --text-primary: #f3f4f6;
   --text-secondary: #9ca3af;

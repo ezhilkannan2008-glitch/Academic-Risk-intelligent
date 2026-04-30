@@ -122,3 +122,16 @@ academic-integrity-risk/
     ├── app/services/             # Real-time Analytics algorithms
     └── app.db                    # SQLite Database
 ```
+
+---
+
+## 💡 Future Enhancements & Ideas (Roadmap)
+
+To push the **Academic Risk Intelligence System** even further, here are several high-impact ideas for future development:
+
+1. **🤖 Generative AI Explanations**: Integrate an LLM (like Gemini or OpenAI) to automatically draft human-readable intervention reports. If a course is flagged for "Lenient Evaluation", the AI can instantly write an email to the department head summarizing the statistical evidence.
+2. **🔗 LMS Integration (Canvas / Blackboard)**: Build API connectors to automatically sync grades and submission timestamps directly from the university's Learning Management System, eliminating the need for manual data entry or CSV uploads.
+3. **📊 Historical Trend Analysis**: Track a professor's grading curve across multiple semesters. If a notoriously difficult course suddenly has a 95% average, the system can flag it as a historical anomaly rather than just a current-semester anomaly.
+4. **🧑‍💻 Code & Essay Similarity Analysis**: For programming and essay-heavy courses, integrate NLP and AST (Abstract Syntax Tree) parsing to check for structural similarities across the entire class, exposing potential "cheating rings" or leaked exam keys.
+5. **🧠 Predictive Performance Modeling**: Use XGBoost to predict the *expected* average of an upcoming exam based on the cohort's past performance. If the actual average deviates significantly from the prediction, it triggers an immediate integrity review.
+6. **📱 Mobile Admin App**: Develop a React Native companion app for Deans and Administrators to receive push notifications on their phones the moment a severe academic risk is detected in the system.
