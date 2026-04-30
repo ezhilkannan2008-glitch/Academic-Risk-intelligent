@@ -1,14 +1,63 @@
-# Node
+# ==========================================
+# React Frontend
+# ==========================================
 node_modules/
+frontend/node_modules/
 dist/
+frontend/dist/
 build/
+frontend/build/
+*.local
 
-# Python
+# ==========================================
+# Python Backend
+# ==========================================
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.so
 
-# Env
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+backend/venv/
+backend/.venv/
+
+# ==========================================
+# Environment Variables (NEVER commit secrets)
+# ==========================================
 .env
+backend/.env
+frontend/.env
 
+# ==========================================
 # Logs
+# ==========================================
 *.log
+npm-debug.log*
+yarn-error.log*
+
+# ==========================================
+# OS & Editor Junk
+# ==========================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ==========================================
+# Temporary/Scratch files
+# ==========================================
+api_test.json
+
+# ==========================================
+# NOTE: The following are intentionally NOT ignored
+# so all project data is visible in the repo:
+#   - backend/database/app.db         (SQLite database)
+#   - backend/database/schema.sql     (Database schema)
+#   - backend/database/*.db           (All databases)
+#   - backend/scripts/*.py            (Data generation scripts)
+# ==========================================
